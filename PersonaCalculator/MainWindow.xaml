@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonaCalculator"
         mc:Ignorable="d"
+        Background="Gold"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -21,6 +22,9 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
+        <TextBlock Name="tbkHeader" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" FontSize="40" Margin="5" TextAlignment="Center" >Persona 4 Calculator</TextBlock>
+        <Button Name="btnHome" Grid.Column="5" Grid.Row="0" Background="Crimson" Margin="10" 
+                FontSize="25" FontWeight="SemiBold">HOME</Button>
+        
     </Grid>
 </Window>
