@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Personas.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="PersonasStoreContainer">
+    <EntitySet Name="Personas" EntityType="Personas.Store.Personas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Arcanas" EntityType="Personas.Store.Arcanas" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="PersonaArcana" Association="Personas.Store.PersonaArcana">
+      <End Role="Persona" EntitySet="Personas" />
+      <End Role="Arcana" EntitySet="Arcanas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Personas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Level" Type="int" Nullable="false" />
+    <Property Name="Arcana_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Arcanas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ArcanaName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="PersonaArcana">
+    <End Role="Persona" Type="Personas.Store.Personas" Multiplicity="*" />
+    <End Role="Arcana" Type="Personas.Store.Arcanas" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Arcana">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="Arcana_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Personas" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="PersonasContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Personas" EntityType="Personas.Persona" />
+          <EntitySet Name="Arcanas" EntityType="Personas.Arcana" />
+          <AssociationSet Name="PersonaArcana" Association="Personas.PersonaArcana">
+            <End Role="Persona" EntitySet="Personas" />
+            <End Role="Arcana" EntitySet="Arcanas" />
+          </AssociationSet>
+          <EntitySet Name="Fusions" EntityType="Personas.Fusion" />
+        </EntityContainer>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Arcana" Relationship="Personas.PersonaArcana" FromRole="Persona" ToRole="Arcana" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Arcana">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArcanaName" Type="String" Nullable="false" />
+          <NavigationProperty Name="Personas" Relationship="Personas.PersonaArcana" FromRole="Arcana" ToRole="Persona" />
+        </EntityType>
+        <Association Name="PersonaArcana">
+          <End Type="Personas.Persona" Role="Persona" Multiplicity="*" />
+          <End Type="Personas.Arcana" Role="Arcana" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Fusion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Result" Type="String" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PersonasStoreContainer" CdmEntityContainer="PersonasContainer">
+    <EntitySetMapping Name="Personas">
+      <EntityTypeMapping TypeName="IsTypeOf(Personas.Persona)">
+        <MappingFragment StoreEntitySet="Personas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Level" ColumnName="Level" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Arcanas">
+      <EntityTypeMapping TypeName="IsTypeOf(Personas.Arcana)">
+        <MappingFragment StoreEntitySet="Arcanas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ArcanaName" ColumnName="ArcanaName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="PersonaArcana" TypeName="Personas.PersonaArcana" StoreEntitySet="Personas">
+      <EndProperty Name="Arcana">
+        <ScalarProperty Name="Id" ColumnName="Arcana_Id" />
+      </EndProperty>
+      <EndProperty Name="Persona">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

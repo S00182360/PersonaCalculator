@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 
 namespace PersonaCalculator
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    
     public partial class MainWindow : Window
     {
+        PersonasContainer db = new PersonasContainer();
+
         public MainWindow()
         {
             InitializeComponent();
