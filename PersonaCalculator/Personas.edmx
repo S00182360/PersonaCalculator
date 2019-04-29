@@ -53,6 +53,10 @@
             <End Role="Arcana" EntitySet="Arcanas" />
           </AssociationSet>
           <EntitySet Name="Fusions" EntityType="Personas.Fusion" />
+          <AssociationSet Name="FusionPersona" Association="Personas.FusionPersona">
+            <End Role="Fusion" EntitySet="Fusions" />
+            <End Role="Persona" EntitySet="Personas" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Persona">
           <Key>
@@ -62,6 +66,8 @@
           <Property Name="Name" Type="String" Nullable="false" />
           <NavigationProperty Name="Arcana" Relationship="Personas.PersonaArcana" FromRole="Persona" ToRole="Arcana" />
           <Property Name="Level" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Fusion" Relationship="Personas.FusionPersona" FromRole="Persona" ToRole="Fusion" />
+          <Property Name="FusionId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Arcana">
           <Key>
@@ -81,7 +87,43 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Result" Type="String" Nullable="false" />
+          <NavigationProperty Name="Personas" Relationship="Personas.FusionPersona" FromRole="Fusion" ToRole="Persona" />
         </EntityType>
+        <EnumType Name="Arcanas" cg:ExternalTypeName="Arcana">
+          <Member Name="Fool" Value="1" />
+          <Member Name="Magician" Value="2" />
+          <Member Name="Priestess" Value="3" />
+          <Member Name="Empress" Value="4" />
+          <Member Name="Emperor" Value="5" />
+          <Member Name="Hierophant" Value="6" />
+          <Member Name="Lovers" Value="7" />
+          <Member Name="Chariot" Value="8" />
+          <Member Name="Justice" Value="9" />
+          <Member Name="Hermit" Value="10" />
+          <Member Name="Fortune" Value="11" />
+          <Member Name="Strength" Value="12" />
+          <Member Name="HangedMan" Value="13" />
+          <Member Name="Death" Value="14" />
+          <Member Name="Temperance" Value="15" />
+          <Member Name="Devil" Value="16" />
+          <Member Name="Tower" Value="17" />
+          <Member Name="Star" Value="18" />
+          <Member Name="Moon" Value="19" />
+          <Member Name="Sun" Value="20" />
+          <Member Name="Judgement" Value="21" />
+        </EnumType>
+        <Association Name="FusionPersona">
+          <End Type="Personas.Fusion" Role="Fusion" Multiplicity="1" />
+          <End Type="Personas.Persona" Role="Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fusion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="FusionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

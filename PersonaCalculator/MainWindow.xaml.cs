@@ -18,7 +18,7 @@ namespace PersonaCalculator
     
     public partial class MainWindow : Window
     {
-        PersonasContainer db = new PersonasContainer();
+        public PersonasContainer db = new PersonasContainer();
 
         public MainWindow()
         {

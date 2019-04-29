@@ -179,7 +179,7 @@
     {"arcana": 20,         "level": 68, "name": "Horus"             },
     {"arcana": 20,         "level": 77, "name": "Suparna"           },
     {"arcana": 20,         "level": 86, "name": "Asura",             "max": true },
-    {"arcana": 21,   "level": 59, "name": "Anubis"            },
+    {"azrcana": 21,   "level": 59, "name": "Anubis"            },
     {"arcana": 21,   "level": 67, "name": "Trumpeter",         "special": true },
     {"arcana": 21,   "level": 72, "name": "Michael"           },
     {"arcana": 21,   "level": 76, "name": "Satan"             },

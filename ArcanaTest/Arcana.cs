@@ -7,19 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PersonaCalculator
+namespace ArcanaTest
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Persona
+    public partial class Arcana
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int Level { get; set; }
-        public int FusionId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Arcana()
+        {
+            this.Personas = new HashSet<Persona>();
+        }
     
-        public virtual Arcana Arcana { get; set; }
-        public virtual Fusion Fusion { get; set; }
+        public int Id { get; set; }
+        public string ArcanaName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Persona> Personas { get; set; }
     }
 }

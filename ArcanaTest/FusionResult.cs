@@ -1,14 +1,15 @@
-﻿using System;
+﻿using PersonaCalculator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PersonaCalculator
+namespace ArcanaTest
 { 
     class FusionResult
     {
-        public PersonasContainer db { get; set; }
+        static public PersonasEntities db = new PersonasEntities();
         //public Arcana[] Arcanas { get; set; }
         public Arcana Parent1 { get; set; }
         public Arcana Parent2 { get; set; }
@@ -44,17 +45,18 @@ namespace PersonaCalculator
             Parent2 = parent2;
         }
 
-        public Arcana CheckResult1(Arcana p1, Arcana p2)
+        public Arcana CheckResult1()
         {
-            int resultKey = ResultKeys[p1.Id, p2.Id];
+            int resultKey = ResultKeys[Parent1.Id, Parent2.Id];
             if (resultKey == 0)
             {
-                return new Arcana { Id = 1002 };
+                return db.Arcanas.Where(id => id.Id == 1002).First();
             }
             else
             {
-                return new Arcana { Id = resultKey };
+                return db.Arcanas.Where(id => id.Id == resultKey).First();
             }
         }
+
     }
 }

@@ -14,7 +14,16 @@ namespace PersonaCalculator
     
     public partial class Fusion
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Fusion()
+        {
+            this.Personas = new HashSet<Persona>();
+        }
+    
         public int Id { get; set; }
         public string Result { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Persona> Personas { get; set; }
     }
 }

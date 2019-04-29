@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PersonaCalculator
+namespace ArcanaTest
 {
     using System;
     using System.Collections.Generic;
@@ -17,9 +17,8 @@ namespace PersonaCalculator
         public int Id { get; set; }
         public string Name { get; set; }
         public int Level { get; set; }
-        public int FusionId { get; set; }
+        public int Arcana_Id { get; set; }
     
         public virtual Arcana Arcana { get; set; }
-        public virtual Fusion Fusion { get; set; }
     }
 }
