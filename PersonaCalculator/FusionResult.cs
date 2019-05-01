@@ -8,11 +8,11 @@ namespace PersonaCalculator
 { 
     class FusionResult
     {
-        public PersonasContainer db { get; set; }
+        public PersonasContainer DB { get; set; }
         //public Arcana[] Arcanas { get; set; }
-        public Arcana Parent1 { get; set; }
-        public Arcana Parent2 { get; set; }
-        public Arcana Result { get; set; }
+        public Persona Parent1 { get; set; }
+        public Persona Parent2 { get; set; }
+        public Persona Result { get; set; }
         private int[,] ResultKeys = new int[,]
         {
             {1,15,14,19,14,8,4,20,2,12,2,2,12,10,6,15,18,4,5,16,13},
@@ -38,22 +38,31 @@ namespace PersonaCalculator
             {13,7,20,3,7,8,12,15,7,18,13,0,4,0,0,0,0,0,0,0,21}
         };
 
-    public FusionResult(Arcana parent1, Arcana parent2)
+    public FusionResult(Persona parent1, Persona parent2)
         {
             Parent1 = parent1;
             Parent2 = parent2;
         }
 
-        public Arcana CheckResult1(Arcana p1, Arcana p2)
+        public Persona CheckPersonaResult(Persona p1, Persona p2)
         {
-            int resultKey = ResultKeys[p1.Id, p2.Id];
+            var arcanaQuery = DB.Personas.Where(p => p.Arcana == CheckArcana(p1, p2));
+            double levelAverage = Math.Ceiling((double)(p1.Level + p2.Level) / 2);
+
+            Persona Result = arcanaQuery.Where(p => p.Level >= levelAverage).First();
+            return Result;
+        }
+
+        public Arcana CheckArcana(Persona p1, Persona p2)
+        {
+            int resultKey = ResultKeys[p1.Arcana.Id, p2.Arcana.Id];
             if (resultKey == 0)
             {
-                return new Arcana { Id = 1002 };
+                return DB.Arcanas.Where(k => k.Id == 1002).First();
             }
             else
             {
-                return new Arcana { Id = resultKey };
+                return DB.Arcanas.Where(k => k.Id == resultKey).First();
             }
         }
     }

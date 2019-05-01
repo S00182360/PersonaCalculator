@@ -85,6 +85,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Partial Classes\Arcana.cs" />
+    <Compile Include="Partial Classes\Persona.cs" />
     <Compile Include="Persona.cs">
       <DependentUpon>Personas.tt</DependentUpon>
     </Compile>
